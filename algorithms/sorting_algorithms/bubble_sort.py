@@ -11,7 +11,7 @@ def bubble_sort(arr):
 unsorted_arr = [12, 23, 10, 4, 68, 57, 98, 17]
 print("Unsorted: \n", unsorted_arr, "\n")
 bubble_sort(unsorted_arr)
-print("Sorted: \n", unsorted_arr, "\n")
+print("Sorted: \n", unsorted_arr, "\n") # Total number of iterations: 56
 
 def bubble_sort_optimized(arr):
     iterations = 0
@@ -26,4 +26,4 @@ def bubble_sort_optimized(arr):
 unsorted_arr_opt = [12, 23, 10, 4, 68, 57, 98, 17]
 print("Unsorted: \n", unsorted_arr_opt, "\n")
 bubble_sort_optimized(unsorted_arr_opt)
-print("Sorted: \n", unsorted_arr_opt, "\n")
+print("Sorted: \n", unsorted_arr_opt, "\n") # Total number of iterations: 28
