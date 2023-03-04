@@ -1,4 +1,4 @@
-# Big O Notation
+# Asymptotic & Big O Notation
 
 The efficiency of an algorithm can not be represented in be compared using the amount of time it took for the algorithm to complete its task. Too many variables can distort this outcome:
 
@@ -12,9 +12,15 @@ But since not everyone wants to learn the algebra necessary it has become standa
 
 > Technically the Big O Notation shows the worst case scenario of the algorithm. The best case scenario would be the Ω(omega) Notation, the average case would be the Θ(theta) Notation.
 
+## Time complexity vs space complexity
+
+Not only is it necessary to describe the `time complexity` of a function, but also the `space complexity`. The space complexity usually refers to the amount of memory that is used up with new variables, lists etc.
+Take for example the `bubble sort` algorithm: since it is not creating any variables or lists along the way and keeps moving the elements in the given list inside said list, it has a constant space complexity of `O(1)`.
+The merge sort algorithm on the other hand has a space complexity of `O(N)` since it is creating small arrays with length of 1.
+
 ## Ranking
 
-From fastest to slowest:
+From fastest to slowest (speaking from a time complextity perspective):
 
 1. O(1)
 2. O(logN)
@@ -49,7 +55,7 @@ arr = [1, 2, 3, 4]
 find(arr, 1) # constant time since 1 is at index 0
 ```
 
-### O(logN)
+<!-- ### O(logN)
 
 ### O(N)
 
@@ -59,4 +65,4 @@ find(arr, 1) # constant time since 1 is at index 0
 
 ### O(2^N)
 
-### O(N!)
+### O(N!) -->
