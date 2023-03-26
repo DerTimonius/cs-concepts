@@ -31,6 +31,8 @@ From fastest to slowest (speaking from a time complextity perspective):
 7. O(2^N)
 8. O(N!)
 
+![Chart of Big O complexity](https://imgs.search.brave.com/ZbjOLNSFGHxXFYKV4cjnV70x7fYiFy8Ns2BYMiH9_KM/rs:fit:1200:851:1/g:ce/aHR0cHM6Ly9jZG4t/aW1hZ2VzLTEubWVk/aXVtLmNvbS9tYXgv/MTIwMC8xKl9uc01W/RUVrSXIxQ0g4YUhq/VE5iekEuanBlZw)
+
 ## Different types
 
 ### O(1)
@@ -53,6 +55,36 @@ def find(arr, target):
 
 arr = [1, 2, 3, 4]
 find(arr, 1) # constant time since 1 is at index 0
+```
+
+Accessing a specific element in an array (`array[index]`) with a given index also takes O(1) time.
+
+### O(N)
+
+Also known as linear time - the larger the input, the longer it takes for the algorithm to run.
+A simple example would be a function that loops through an array and manipulates the value (in this case multiplies it with a given value):
+
+```python
+def multiply(arr, mul):
+  for i in range(len(arr)):
+    arr[i] *= mul
+  return arr
+```
+
+If the size of the array increases, the time it takes increases linearly, meaning that if the array gets 10 times larger, it takes 10 times as long.
+
+### O(N^2)
+
+_Quadratic time_ - it's no joke. If the size of any given array increases by the factor 4, the time for the algorithm increases by 16!
+Examples of this are _Bubble Sort_ or _Insertion Sort_.
+
+```python
+def bubble_sort(arr):
+    for item in arr:
+        for i in range(len(arr)-1):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+    return arr
 ```
 
 <!-- ### O(logN)
