@@ -59,6 +59,26 @@ find(arr, 1) # constant time since 1 is at index 0
 
 Accessing a specific element in an array (`array[index]`) with a given index also takes O(1) time.
 
+### O(log\*N)
+
+Logarithmic time is great. To double the time it takes a multiple of the original size.
+![Graph of logarithmic scale](https://imgs.search.brave.com/Xh9bNYEHUt106W4Jaq6t31vG5KICyIU3YeTM7UrFTFw/rs:fit:607:574:1/g:ce/aHR0cDovL3d3dy5k/cGxvdC5jb20vbG9n/YXJpdGhtaWMvbG9n/bG9nX2g2MDAucG5n)
+The typical example for an algorithm that runs in _O(log\*N)_ time is the _binary search algorithm_.
+
+```python
+def binary_search(arr, target, first, last):
+  if first > last:
+    return False
+  middle_idx = (first + last) // 2
+  middle_val = arr[middle_idx]
+  if middle_val == target:
+    return middle_idx
+  if middle_val > target:
+    return binary_search(arr, target, first, middle_idx)
+  if middle_val < target:
+    return binary_search(arr, target, middle_idx, last)
+```
+
 ### O(N)
 
 Also known as linear time - the larger the input, the longer it takes for the algorithm to run.
@@ -72,6 +92,39 @@ def multiply(arr, mul):
 ```
 
 If the size of the array increases, the time it takes increases linearly, meaning that if the array gets 10 times larger, it takes 10 times as long.
+
+### O(N log N)
+
+That's quasi linear time. A bit worse than linear time but not much.
+A great example for this would be _Mergesort_ since this always takes _O(N log N)_ time, independent of the state of the array.
+
+```python
+def merge_sort(arr):
+    length = len(arr)
+    if length <= 1:
+        return arr
+    middle_index = length // 2
+    left_arr = arr[:middle_index]
+    right_arr = arr[middle_index:]
+    sort_left = merge_sort(left_arr)
+    sort_right = merge_sort(right_arr)
+    return merge(sort_left, sort_right)
+
+def merge(left, right):
+    arr = []
+    while left and right:
+        if left[0] < right[0]:
+            arr.append(left[0])
+            left.pop(0)
+        else:
+            arr.append(right[0])
+            right.pop(0)
+    if left:
+        arr += left
+    if right:
+        arr += right
+    return arr
+```
 
 ### O(N^2)
 
@@ -87,14 +140,8 @@ def bubble_sort(arr):
     return arr
 ```
 
-<!-- ### O(logN)
+An algorithm which iterates through the complete array for each element of said array does so _N_ \* _N_ times.
 
-### O(N)
+### Very bad algorithms
 
-### O(N\*logN)
-
-### O(N²)
-
-### O(2^N)
-
-### O(N!) -->
+The two most common and least efficient algorithms run in _O(2^N)_ and _O(N!)_ time, so _exponential_ and _factorial_ time. Just hope we don't need any of those.
