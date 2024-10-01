@@ -1,19 +1,23 @@
-export function quicksort(arr: number[]): number[] {
-  if (arr.length <= 1) {
-    return arr;
+export function quicksort(arr: number[], start: number, end: number): void {
+  if (start >= end) {
+    return;
   }
 
-  const pivot = arr[0];
-  const left: number[] = [];
-  const right: number[] = [];
+  const pivot = arr[start];
 
-  for (let i = 1; i < arr.length; i++) {
+  let pointer = start + 1;
+  for (let i = pointer; i <= end; i++) {
     if (arr[i] < pivot) {
-      left.push(arr[i]);
-    } else {
-      right.push(arr[i]);
+      const tmp = arr[i];
+      arr[i] = arr[pointer];
+      arr[pointer] = tmp;
+      pointer++;
     }
   }
 
-  return [...quicksort(left), pivot, ...quicksort(right)];
+  arr[start] = arr[pointer - 1];
+  arr[pointer - 1] = pivot;
+
+  quicksort(arr, start, pointer - 2);
+  quicksort(arr, pointer, end);
 }
