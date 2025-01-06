@@ -1,18 +1,21 @@
 {
-  "name": "cs-concepts",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "vitest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "typescript": "^5.2.2"
-  },
-  "devDependencies": {
-    "vitest": "^0.34.6"
-  }
+	"name": "cs-concepts",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "vitest",
+		"lint": "biome lint --write .",
+		"format": "biome format --write ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"typescript": "^5.2.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"vitest": "^0.34.6"
+	}
 }
