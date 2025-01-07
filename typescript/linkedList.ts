@@ -1,8 +1,8 @@
-class ListNode {
-	value: number;
-	next: ListNode | null;
-	prev: ListNode | null;
-	constructor(value) {
+class ListNode<T> {
+	value: T;
+	next: ListNode<T> | null;
+	prev: ListNode<T> | null;
+	constructor(value: T) {
 		this.value = value;
 		this.next = null;
 		this.prev = null;
@@ -13,22 +13,25 @@ class ListNode {
 	getPrevNode() {
 		return this.prev;
 	}
-	setNextNode(node: ListNode | null) {
+	setNextNode(node: ListNode<T> | null) {
 		this.next = node;
 	}
-	setPrevNode(node: ListNode | null) {
+	setPrevNode(node: ListNode<T> | null) {
 		this.prev = node;
 	}
 }
 
-export class LinkedList {
-	head: ListNode | null;
-	tail: ListNode | null;
+// doubly linked list
+export class LinkedList<T> {
+	head: ListNode<T> | null;
+	tail: ListNode<T> | null;
+
 	constructor() {
 		this.head = null;
 		this.tail = null;
 	}
-	addToHead(value: number) {
+
+	addToHead(value: T) {
 		const newHead = new ListNode(value);
 		const currentHead = this.head;
 		this.head = newHead;
@@ -40,7 +43,7 @@ export class LinkedList {
 		}
 		return newHead.value;
 	}
-	addToTail(value: number) {
+	addToTail(value: T) {
 		const newTail = new ListNode(value);
 		const currentTail = this.tail;
 		this.tail = newTail;
@@ -101,7 +104,7 @@ export class LinkedList {
 		return null;
 	}
 	getAllValues() {
-		const values: number[] = [];
+		const values: T[] = [];
 		let currentNode = this.head;
 		while (currentNode) {
 			values.push(currentNode.value);

@@ -1,7 +1,7 @@
 export function radixSort(nums: number[]) {
 	const maxLength = getLongestNumberLength(nums);
 
-	const buckets = Array.from({ length: 10 }, () => []);
+	const buckets: number[][] = Array.from({ length: 10 }, () => []);
 
 	for (let i = 0; i < maxLength; i++) {
 		while (nums.length) {

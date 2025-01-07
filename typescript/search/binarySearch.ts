@@ -8,14 +8,15 @@ export function binarySearch(
 		return -1;
 	}
 
-	const middle = Math.floor(low + (high - low) / 2);
+	const middle = Math.floor((low + high) / 2);
 	const middleVal = arr[middle];
 
 	if (middleVal === val) {
 		return middle;
-	} else if (middleVal > val) {
-		return binarySearch(arr, val, low, middle);
-	} else {
-		return binarySearch(arr, val, middle + 1, high);
 	}
+	if (middleVal > val) {
+		return binarySearch(arr, val, low, middle);
+	}
+
+	return binarySearch(arr, val, middle + 1, high);
 }
