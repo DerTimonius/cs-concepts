@@ -8,15 +8,6 @@ class BSTNode<T> {
 		this.right = right;
 		this.left = left;
 	}
-
-	serialize() {
-		const ans = { value: this.value };
-		// @ts-expect-error: won't bother
-		ans.left = this.left === null ? null : this.left.serialize();
-		// @ts-expect-error: won't bother
-		ans.right = this.right === null ? null : this.right.serialize();
-		return ans;
-	}
 }
 
 export class BinarySearchTree<T> {
@@ -238,10 +229,6 @@ export class BinarySearchTree<T> {
 		}
 
 		return this.findWithParent(value, node.left);
-	}
-
-	toObject() {
-		return this.root?.serialize();
 	}
 
 	invert(node: BSTNode<T> | null = this.root) {
