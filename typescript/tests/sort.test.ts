@@ -1,14 +1,21 @@
-import { describe, expect, test } from "vitest";
+import { expect, test } from "vitest";
 
 import { bubblesort } from "../sort/bubblesort";
 import { mergesort } from "../sort/mergesort";
 import { insertionSort } from "../sort/insertionSort";
 import { quicksort } from "../sort/quicksort";
 import { radixSort } from "../sort/radixsort";
+import { selectionSort } from "../sort/selectionSort";
 
 test("bubblesort", () => {
 	const unsorted = [4, 7, 1, 8, 3, 9, 12, 6, 0];
 	bubblesort(unsorted);
+	expect(unsorted).toEqual([0, 1, 3, 4, 6, 7, 8, 9, 12]);
+});
+
+test("selectionSort", () => {
+	const unsorted = [4, 7, 1, 8, 3, 9, 12, 6, 0];
+	selectionSort(unsorted);
 	expect(unsorted).toEqual([0, 1, 3, 4, 6, 7, 8, 9, 12]);
 });
 
