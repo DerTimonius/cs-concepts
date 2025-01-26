@@ -282,4 +282,27 @@ describe("AVL Tree", () => {
 			expect(avl.postorderTraversal([])).toEqual([2, 4, 3, 6, 8, 7, 5]);
 		});
 	});
+
+	test("deletion", () => {
+		const avl = new AVLTree<number>();
+		// biome-ignore lint/complexity/noForEach: <explanation>
+		[1, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 18].forEach((num) => {
+			avl.insert(num);
+		});
+
+		expect(avl.preorderTraversal()).toEqual([
+			10, 5, 3, 1, 4, 7, 6, 8, 15, 13, 12, 14, 17, 16, 18,
+		]);
+
+		avl.delete(6);
+		avl.delete(15);
+		expect(avl.preorderTraversal()).toEqual([
+			10, 5, 3, 1, 4, 7, 8, 16, 13, 12, 14, 17, 18,
+		]);
+		avl.delete(7);
+		avl.delete(8);
+		expect(avl.preorderTraversal()).toEqual([
+			10, 3, 1, 5, 4, 16, 13, 12, 14, 17, 18,
+		]);
+	});
 });

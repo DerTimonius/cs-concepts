@@ -58,7 +58,7 @@ export class AVLTree<T> {
 		return node.height;
 	}
 
-	updateHeight(node: AVLNode<T> | null) {
+	#updateHeight(node: AVLNode<T> | null) {
 		if (!node) {
 			return;
 		}
@@ -71,6 +71,14 @@ export class AVLTree<T> {
 		if (!node) return 0;
 
 		return this.#getHeight(node.left) - this.#getHeight(node.right);
+	}
+
+	#findRightMin(node: AVLNode<T>): AVLNode<T> {
+		let current = node;
+		while (current.left) {
+			current = current.left;
+		}
+		return current;
 	}
 
 	insert(value: T, node: AVLNode<T> | null = this.root) {
@@ -89,7 +97,7 @@ export class AVLTree<T> {
 			node.right = this.insert(value, node.right);
 		}
 
-		this.updateHeight(node);
+		this.#updateHeight(node);
 
 		const balance = this.#getBalanceFactor(node);
 
@@ -112,6 +120,48 @@ export class AVLTree<T> {
 		return node;
 	}
 
+	delete(value: T, node: AVLNode<T> | null = this.root): AVLNode<T> | null {
+		if (!node) return null;
+
+		if (value < node.value) {
+			node.left = this.delete(value, node.left);
+		} else if (value > node.value) {
+			node.right = this.delete(value, node.right);
+		} else {
+			if (!node.right) return node.left;
+			if (!node.left) return node.right;
+
+			const successor = this.#findRightMin(node.right);
+			node.value = successor.value;
+			node.right = this.delete(successor.value, node.right);
+		}
+
+		this.#updateHeight(node);
+		const balance = this.#getBalanceFactor(node);
+
+		if (balance > 1) {
+			const leftBalance = this.#getBalanceFactor(node.left);
+			if (leftBalance >= 0) {
+				return this.rotateRight(node);
+			}
+			if (leftBalance < 0 && node.left) {
+				node.left = this.rotateLeft(node.left);
+				return this.rotateRight(node);
+			}
+		}
+		if (balance < -1) {
+			const rightBalance = this.#getBalanceFactor(node.right);
+			if (rightBalance <= 0) {
+				return this.rotateLeft(node);
+			}
+			if (rightBalance > 0 && node.right) {
+				node.right = this.rotateRight(node.right);
+				return this.rotateLeft(node);
+			}
+		}
+		return node;
+	}
+
 	rotateLeft(node: AVLNode<T>) {
 		// biome-ignore lint/style/noNonNullAssertion: has to exist
 		const newRoot = node.right!;
@@ -120,8 +170,8 @@ export class AVLTree<T> {
 		newRoot.left = node;
 		node.right = newRight;
 
-		this.updateHeight(node);
-		this.updateHeight(newRoot);
+		this.#updateHeight(node);
+		this.#updateHeight(newRoot);
 
 		if (node === this.root) {
 			this.root = newRoot;
@@ -138,8 +188,8 @@ export class AVLTree<T> {
 		newRoot.right = node;
 		node.left = newLeft;
 
-		this.updateHeight(node);
-		this.updateHeight(newRoot);
+		this.#updateHeight(node);
+		this.#updateHeight(newRoot);
 
 		if (node === this.root) {
 			this.root = newRoot;
